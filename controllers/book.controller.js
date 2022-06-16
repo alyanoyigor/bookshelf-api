@@ -36,8 +36,7 @@ module.exports.createBook = async (req, res) => {
   try {
     await bookSchema.validate(req.body);
     const { name, description } = req.body;
-    const model = new BookModel(name, description);
-    const data = model.save();
+    const data = bookService.createBook(name, description);
     return formatSuccessResponse(res, data);
   } catch (error) {
     console.log(error);

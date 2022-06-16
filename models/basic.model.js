@@ -4,7 +4,8 @@ const { v4: uuidv4 } = require('uuid');
 class BasicModel {
   save() {
     const id = uuidv4();
-    const data = { id, ...this };
+    const { name, description } = this;
+    const data = { id, name, description };
     db.set(id, data);
     return data;
   }
