@@ -3,7 +3,6 @@ const {
   formatErrorResponse,
 } = require('../services/http.service');
 const yup = require('yup');
-const BookModel = require('../models/book.model');
 const bookService = require('../services/book.service');
 
 const bookSchema = yup.object().shape({
