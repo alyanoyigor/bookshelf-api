@@ -1,5 +1,5 @@
-const db = require('../db');
-const BookModel = require('../models/book.model');
+import db from '../db';
+import BookModel from '../models/book.model';
 
 class BookService {
   getBookId(id) {
@@ -12,4 +12,4 @@ class BookService {
   }
 }
 
-module.exports = new BookService();
+export default BookService;
