@@ -5,7 +5,7 @@ import {
   formatErrorResponse,
 } from '../services/http.service';
 import BookModel from '../models/book.model';
-import { Book } from '../types';
+import { TBook } from '../types';
 
 class BookController {
   bookSchema = yup.object().shape({
@@ -13,7 +13,7 @@ class BookController {
     description: yup.string().required(),
   });
 
-  findBook(res: Response, book: Book | null) {
+  findBook(res: Response, book: TBook | null) {
     if (!book) {
       throw new Error("Can't find item by determine id");
     }
