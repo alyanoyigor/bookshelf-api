@@ -1,14 +1,14 @@
-module.exports.formatResponse = (error, data) => {
+export function formatResponse(error, data) {
   return {
     error,
     data,
   };
-};
+}
 
-module.exports.formatSuccessResponse = (res, data) => {
-  return res.status(200).json(this.formatResponse(false, data));
-};
+export function formatSuccessResponse(res, data) {
+  return res.status(200).json(formatResponse(false, data));
+}
 
-module.exports.formatErrorResponse = (res, error) => {
-  return res.status(400).json(this.formatResponse(true, error));
-};
+export function formatErrorResponse(res, error) {
+  return res.status(400).json(formatResponse(true, error));
+}

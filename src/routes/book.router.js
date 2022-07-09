@@ -1,20 +1,12 @@
 import express from 'express';
-import * as bookController from '../controllers/book.controller';
-import idRequiredMiddleware from '../middlewares/idRequired.middleware';
+import BookController from '../controllers/book.controller.js';
 
-const router = express.Router();
+const bookRouter = express.Router();
+const bookController = new BookController();
 
-router.get('/', bookController.getAllBooks.bind(bookController));
-router.get(
-  '/:id',
-  idRequiredMiddleware,
-  bookController.getBook.bind(bookController)
-);
-// router.post('/', bookController.createBook.bind(bookController));
-// router.patch(
-//   '/:id',
-//   idRequiredMiddleware,
-//   bookController.updateBook.bind(bookController)
-// );
+bookRouter.get('/', bookController.getAllBooks.bind(bookController));
+bookRouter.get('/:id', bookController.getBook.bind(bookController));
+bookRouter.post('/', bookController.createBook.bind(bookController));
+// bookRouter.patch( '/:id', bookController.updateBook.bind(bookController));
 
-module.exports = router;
+export default bookRouter;

@@ -1,42 +1,39 @@
 import {
   formatSuccessResponse,
   formatErrorResponse,
-} from '../services/http.service';
+} from '../services/http.service.js';
 import * as yup from 'yup';
-import BookService from '../services/book.service';
-import BookModel from '../models/book.model';
+import BookModel from '../models/book.model.js';
 
 class BookController {
   bookSchema = yup.object().shape({
-    name: yup.string().required(),
+    title: yup.string().required(),
     description: yup.string().required(),
   });
 
-  constructor(bookService = new BookService()) {
-    this.bookService = bookService;
-  }
-
-  getAllBooks(req, res) {
-    const books = req.db.JSON();
+  async getAllBooks(req, res) {
+    const books = await BookModel.find({});
     return formatSuccessResponse(res, { books });
   }
 
   async getBook(req, res) {
-    const book = await BookModel.findOne({ _id: req.params.id });
-    // const id = req.params;
-    // const book = this.bookService.getBookId(req.params.id);
-    return formatSuccessResponse(res, book);
+    try {
+      const book = await BookModel.findOne({ _id: req.params.id });
+      return formatSuccessResponse(res, book);
+    } catch (error) {
+      return formatErrorResponse(res, error);
+    }
   }
 
   async createBook(req, res) {
     try {
-      await bookSchema.validate(req.body);
-      const { name, description } = req.body;
-      const data = this.bookService.createBook(name, description);
-      return formatSuccessResponse(res, data);
+      const data = req.body;
+      // this.bookSchema.validate(data); // app crashing after yup validation
+      const book = new BookModel(data);
+      await book.save();
+      return formatSuccessResponse(res, book);
     } catch (error) {
-      console.log(error);
-      return formatErrorResponse(error);
+      return formatErrorResponse(res, error);
     }
   }
 }
