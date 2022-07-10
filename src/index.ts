@@ -6,7 +6,6 @@ import router from './routes';
 const { PORT, MONGO_URI } = process.env;
 
 const app = express();
-const port = 4400;
 
 app.use(express.urlencoded());
 app.use(express.json());
