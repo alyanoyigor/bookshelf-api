@@ -11,7 +11,7 @@ app.use(express.urlencoded());
 app.use(express.json());
 app.use(cors());
 
-app.use('/api/v1', router);
+app.use('/', router);
 
 app.use('*', (_req, res) => {
   return res.status(404).json({
@@ -27,7 +27,7 @@ const main = async () => {
     }
 
     app.listen(PORT, () => {
-      console.log('Server is running on port ', PORT);
+      console.log('Server is running on port', PORT);
     });
   } catch (error) {
     console.log(error);

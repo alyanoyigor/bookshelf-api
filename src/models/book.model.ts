@@ -1,13 +1,15 @@
-import mongoose from 'mongoose';
+import { Schema, model } from 'mongoose';
+import { TBook } from '../types';
 
-const bookSchema = new mongoose.Schema(
+const bookSchema = new Schema<TBook>(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },
     date: { type: Date, default: new Date() },
-    pages: { type: Number },
+    pages: { type: Number, required: true },
+    excerpt: { type: String },
   },
   { timestamps: true }
 );
 
-export default mongoose.model('Book', bookSchema);
+export default model('Book', bookSchema);

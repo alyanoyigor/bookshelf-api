@@ -23,7 +23,7 @@ class BookController {
   async getAllBooks(req: Request, res: Response) {
     try {
       const books = await BookModel.find().skip(req.page).limit(req.limit);
-      return formatSuccessResponse(res, { books });
+      return formatSuccessResponse(res, books);
     } catch (error) {
       return formatErrorResponse(res, error);
     }

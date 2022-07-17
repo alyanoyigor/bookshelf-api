@@ -2,5 +2,6 @@ export type TBook = {
   title: string;
   description: string;
   date: Date;
-  pages?: number;
+  pages: number;
+  excerpt?: string;
 };
